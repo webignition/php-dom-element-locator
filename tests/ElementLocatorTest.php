@@ -3,6 +3,7 @@
 namespace webignition\DomElementLocator\Tests;
 
 use webignition\DomElementLocator\ElementLocator;
+use webignition\DomElementLocator\ElementLocatorInterface;
 
 class ElementLocatorTest extends \PHPUnit\Framework\TestCase
 {
@@ -34,5 +35,43 @@ class ElementLocatorTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse((new ElementLocator('.selector'))->isXpathExpression());
         $this->assertTrue((new ElementLocator('//h1'))->isXpathExpression());
         $this->assertFalse((new ElementLocator(''))->isXpathExpression());
+    }
+
+    /**
+     * @dataProvider toStringDataProvider
+     */
+    public function testToString(ElementLocatorInterface $locator, string $expectedString)
+    {
+        $this->assertSame($expectedString, (string) $locator);
+    }
+
+    public function toStringDataProvider(): array
+    {
+        return [
+            'empty' => [
+                'locator' => new ElementLocator(''),
+                'expectedString' => '""',
+            ],
+            'css selector' => [
+                'locator' => new ElementLocator('.selector'),
+                'expectedString' => '".selector"',
+            ],
+            'css selector containing double quotes' => [
+                'locator' => new ElementLocator('a[href="https://example.org"]'),
+                'expectedString' => '"a[href=\"https://example.org\"]"',
+            ],
+            'xpath expression' => [
+                'locator' => new ElementLocator('//body'),
+                'expectedString' => '"//body"',
+            ],
+            'xpath expression containing double quotes' => [
+                'locator' => new ElementLocator('//*[@id="id"]'),
+                'expectedString' => '"//*[@id=\"id\"]"',
+            ],
+            'css selector with ordinal position' => [
+                'locator' => new ElementLocator('.selector', 3),
+                'expectedString' => '".selector":3',
+            ],
+        ];
     }
 }
