@@ -4,7 +4,7 @@ namespace webignition\DomElementLocator;
 
 class ElementLocator implements ElementLocatorInterface
 {
-    const XPATH_EXPRESSION_FIRST_CHARACTER = '/';
+    private const XPATH_EXPRESSION_FIRST_CHARACTER = '/';
 
     private $locator;
     private $ordinalPosition;
