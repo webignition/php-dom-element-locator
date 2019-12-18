@@ -1,2 +1,5 @@
 parameters:
   inferPrivatePropertyTypeFromConstructor: true
+  ignoreErrors:
+    # Test methods with intentionally no return type
+    - '#::test.+\(\) has no return typehint specified#'
