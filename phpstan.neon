@@ -1,5 +1,7 @@
 parameters:
   inferPrivatePropertyTypeFromConstructor: true
   ignoreErrors:
+    # Return type of 'array' of test data providers
+    - '#DataProvider\(\) return type has no value type specified in iterable type array#'
     # Test methods with intentionally no return type
     - '#::test.+\(\) has no return typehint specified#'

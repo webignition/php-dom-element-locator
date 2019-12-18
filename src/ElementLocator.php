@@ -5,6 +5,9 @@ namespace webignition\DomElementLocator;
 class ElementLocator implements ElementLocatorInterface
 {
     private const XPATH_EXPRESSION_FIRST_CHARACTER = '/';
+    private const DELIMITER = '"';
+    private const DELIMITER_ESCAPE = '\\';
+    private const POSITION_DELIMITER = ':';
 
     private $locator;
     private $ordinalPosition;
@@ -38,6 +41,31 @@ class ElementLocator implements ElementLocatorInterface
     public function isXpathExpression(): bool
     {
         return true === $this->locatorFirstCharacterIsXpathExpressionFirstCharacter();
+    }
+
+    public function __toString(): string
+    {
+        $locatorCharacters = preg_split('//u', $this->locator, -1, PREG_SPLIT_NO_EMPTY);
+
+        $string = self::DELIMITER;
+
+        if (is_array($locatorCharacters)) {
+            foreach ($locatorCharacters as $character) {
+                if (self::DELIMITER === $character) {
+                    $string .= self::DELIMITER_ESCAPE . $character;
+                } else {
+                    $string .= $character;
+                }
+            }
+        }
+
+        $string .= self::DELIMITER;
+
+        if (null !== $this->ordinalPosition) {
+            $string .= self::POSITION_DELIMITER . $this->ordinalPosition;
+        }
+
+        return $string;
     }
 
     private function locatorFirstCharacterIsXpathExpressionFirstCharacter(): ?bool

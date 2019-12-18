@@ -8,4 +8,5 @@ interface ElementLocatorInterface
     public function getOrdinalPosition(): ?int;
     public function isCssSelector(): bool;
     public function isXpathExpression(): bool;
+    public function __toString(): string;
 }
