@@ -5,7 +5,7 @@ namespace webignition\DomElementLocator;
 class ElementLocator implements ElementLocatorInterface
 {
     private const XPATH_EXPRESSION_FIRST_CHARACTER = '/';
-    private const DELIMITER = '"';
+    public const DELIMITER = '"';
     private const DELIMITER_ESCAPE = '\\';
     private const POSITION_DELIMITER = ':';
 
