@@ -74,4 +74,9 @@ class ElementLocatorTest extends \PHPUnit\Framework\TestCase
             ],
         ];
     }
+
+    public function testToStringDelimiterIsPublic()
+    {
+        $this->assertEquals(ElementLocator::DELIMITER, ElementLocator::DELIMITER);
+    }
 }
