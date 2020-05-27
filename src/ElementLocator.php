@@ -9,8 +9,8 @@ class ElementLocator implements ElementLocatorInterface
     private const DELIMITER_ESCAPE = '\\';
     private const POSITION_DELIMITER = ':';
 
-    private $locator;
-    private $ordinalPosition;
+    private string $locator;
+    private ?int $ordinalPosition;
 
     public function __construct(string $locator, ?int $ordinalPosition = null)
     {
