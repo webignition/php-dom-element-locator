@@ -7,14 +7,14 @@ use webignition\DomElementLocator\ElementLocatorInterface;
 
 class ElementLocatorTest extends \PHPUnit\Framework\TestCase
 {
-    public function testGetLocator()
+    public function testGetLocator(): void
     {
         $locator = '.selector';
 
         $this->assertSame($locator, (new ElementLocator($locator))->getLocator());
     }
 
-    public function testGetOrdinalPosition()
+    public function testGetOrdinalPosition(): void
     {
         $elementLocatorWithoutOrdinalPosition = new ElementLocator('.selector');
         $elementLocatorWithOrdinalPosition = new ElementLocator('.selector', 1);
@@ -23,14 +23,14 @@ class ElementLocatorTest extends \PHPUnit\Framework\TestCase
         $this->assertSame(1, $elementLocatorWithOrdinalPosition->getOrdinalPosition());
     }
 
-    public function testIsCssSelector()
+    public function testIsCssSelector(): void
     {
         $this->assertTrue((new ElementLocator('.selector'))->isCssSelector());
         $this->assertFalse((new ElementLocator('//h1'))->isCssSelector());
         $this->assertFalse((new ElementLocator(''))->isCssSelector());
     }
 
-    public function testIsXpathExpression()
+    public function testIsXpathExpression(): void
     {
         $this->assertFalse((new ElementLocator('.selector'))->isXpathExpression());
         $this->assertTrue((new ElementLocator('//h1'))->isXpathExpression());
@@ -40,11 +40,14 @@ class ElementLocatorTest extends \PHPUnit\Framework\TestCase
     /**
      * @dataProvider toStringDataProvider
      */
-    public function testToString(ElementLocatorInterface $locator, string $expectedString)
+    public function testToString(ElementLocatorInterface $locator, string $expectedString): void
     {
         $this->assertSame($expectedString, (string) $locator);
     }
 
+    /**
+     * @return array[]
+     */
     public function toStringDataProvider(): array
     {
         return [
@@ -75,7 +78,7 @@ class ElementLocatorTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    public function testToStringDelimiterIsPublic()
+    public function testToStringDelimiterIsPublic(): void
     {
         $this->assertEquals(ElementLocator::DELIMITER, ElementLocator::DELIMITER);
     }
