@@ -4,8 +4,8 @@ namespace webignition\DomElementLocator;
 
 class ElementLocator implements ElementLocatorInterface
 {
-    private const XPATH_EXPRESSION_FIRST_CHARACTER = '/';
     public const DELIMITER = '"';
+    private const XPATH_EXPRESSION_FIRST_CHARACTER = '/';
     private const DELIMITER_ESCAPE = '\\';
     private const POSITION_DELIMITER = ':';
 
@@ -16,31 +16,6 @@ class ElementLocator implements ElementLocatorInterface
     {
         $this->locator = $locator;
         $this->ordinalPosition = $ordinalPosition;
-    }
-
-    public function getLocator(): string
-    {
-        return $this->locator;
-    }
-
-    public function getOrdinalPosition(): ?int
-    {
-        return $this->ordinalPosition;
-    }
-
-    public function isCssSelector(): bool
-    {
-        $isXpathExpression = $this->locatorFirstCharacterIsXpathExpressionFirstCharacter();
-        if (null === $isXpathExpression) {
-            return false;
-        }
-
-        return !$isXpathExpression;
-    }
-
-    public function isXpathExpression(): bool
-    {
-        return true === $this->locatorFirstCharacterIsXpathExpressionFirstCharacter();
     }
 
     public function __toString(): string
@@ -66,6 +41,31 @@ class ElementLocator implements ElementLocatorInterface
         }
 
         return $string;
+    }
+
+    public function getLocator(): string
+    {
+        return $this->locator;
+    }
+
+    public function getOrdinalPosition(): ?int
+    {
+        return $this->ordinalPosition;
+    }
+
+    public function isCssSelector(): bool
+    {
+        $isXpathExpression = $this->locatorFirstCharacterIsXpathExpressionFirstCharacter();
+        if (null === $isXpathExpression) {
+            return false;
+        }
+
+        return !$isXpathExpression;
+    }
+
+    public function isXpathExpression(): bool
+    {
+        return true === $this->locatorFirstCharacterIsXpathExpressionFirstCharacter();
     }
 
     private function locatorFirstCharacterIsXpathExpressionFirstCharacter(): ?bool
