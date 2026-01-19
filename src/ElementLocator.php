@@ -2,6 +2,8 @@
 
 namespace webignition\DomElementLocator;
 
+use webignition\DomElementLocator\Enum\Type;
+
 class ElementLocator implements \Stringable, ElementLocatorInterface
 {
     public const DELIMITER = '"';
@@ -66,6 +68,15 @@ class ElementLocator implements \Stringable, ElementLocatorInterface
     public function isXpathExpression(): bool
     {
         return true === $this->locatorFirstCharacterIsXpathExpressionFirstCharacter();
+    }
+
+    public function getType(): ?Type
+    {
+        if ('' === $this->locator) {
+            return null;
+        }
+
+        return $this->isCssSelector() ? Type::CSS : Type::XPATH;
     }
 
     private function locatorFirstCharacterIsXpathExpressionFirstCharacter(): ?bool

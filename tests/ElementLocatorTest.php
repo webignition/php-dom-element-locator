@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use webignition\DomElementLocator\ElementLocator;
 use webignition\DomElementLocator\ElementLocatorInterface;
+use webignition\DomElementLocator\Enum\Type;
 
 class ElementLocatorTest extends TestCase
 {
@@ -37,6 +38,13 @@ class ElementLocatorTest extends TestCase
         $this->assertFalse((new ElementLocator('.selector'))->isXpathExpression());
         $this->assertTrue((new ElementLocator('//h1'))->isXpathExpression());
         $this->assertFalse((new ElementLocator(''))->isXpathExpression());
+    }
+
+    public function testGetType(): void
+    {
+        $this->assertSame(Type::CSS, new ElementLocator('.selector')->getType());
+        $this->assertSame(Type::XPATH, new ElementLocator('//h1')->getType());
+        $this->assertNull(new ElementLocator('')->getType());
     }
 
     #[DataProvider('toStringDataProvider')]
