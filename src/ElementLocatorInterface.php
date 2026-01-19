@@ -2,6 +2,8 @@
 
 namespace webignition\DomElementLocator;
 
+use webignition\DomElementLocator\Enum\Type;
+
 interface ElementLocatorInterface
 {
     public function __toString(): string;
@@ -13,4 +15,6 @@ interface ElementLocatorInterface
     public function isCssSelector(): bool;
 
     public function isXpathExpression(): bool;
+
+    public function getType(): ?Type;
 }
