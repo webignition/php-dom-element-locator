@@ -2,6 +2,7 @@
 
 namespace webignition\DomElementLocator\Tests;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use webignition\DomElementLocator\ElementLocator;
 use webignition\DomElementLocator\ElementLocatorInterface;
@@ -38,9 +39,7 @@ class ElementLocatorTest extends TestCase
         $this->assertFalse((new ElementLocator(''))->isXpathExpression());
     }
 
-    /**
-     * @dataProvider toStringDataProvider
-     */
+    #[DataProvider('toStringDataProvider')]
     public function testToString(ElementLocatorInterface $locator, string $expectedString): void
     {
         $this->assertSame($expectedString, (string) $locator);
@@ -49,7 +48,7 @@ class ElementLocatorTest extends TestCase
     /**
      * @return array<mixed>
      */
-    public function toStringDataProvider(): array
+    public static function toStringDataProvider(): array
     {
         return [
             'empty' => [
