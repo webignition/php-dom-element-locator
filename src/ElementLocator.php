@@ -2,7 +2,7 @@
 
 namespace webignition\DomElementLocator;
 
-class ElementLocator implements ElementLocatorInterface
+class ElementLocator implements \Stringable, ElementLocatorInterface
 {
     public const DELIMITER = '"';
     private const XPATH_EXPRESSION_FIRST_CHARACTER = '/';

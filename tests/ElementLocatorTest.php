@@ -2,10 +2,11 @@
 
 namespace webignition\DomElementLocator\Tests;
 
+use PHPUnit\Framework\TestCase;
 use webignition\DomElementLocator\ElementLocator;
 use webignition\DomElementLocator\ElementLocatorInterface;
 
-class ElementLocatorTest extends \PHPUnit\Framework\TestCase
+class ElementLocatorTest extends TestCase
 {
     public function testGetLocator(): void
     {
